@@ -38,16 +38,18 @@ public class MainActivity extends AndroidApplication implements View.OnClickList
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
-        switch (event.getAction()){
+        switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 offsetX = event.getRawX();
                 break;
             case MotionEvent.ACTION_MOVE:
                 float currentX = event.getRawX();
-                if(currentX<offsetX){
-                    gdxGame.rotateToRight();
-                }else{
-                    gdxGame.rotateToLeft();
+                if (Math.abs(currentX - offsetX) > 3) {
+                    if (currentX < offsetX) {
+                        gdxGame.rotateToRight();
+                    } else {
+                        gdxGame.rotateToLeft();
+                    }
                 }
                 offsetX = currentX;
                 break;
